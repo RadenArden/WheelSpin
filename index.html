@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel of Names</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Bar -->
+    <div class="header-bar">
+        <div class="header-content">
+            <div class="logo">🎨 wheelofnames.com</div>
+            <button class="edit-title-btn" id="editTitleBtn">
+                ✏️ Edit Title
+            </button>
+        </div>
+    </div>
+
+    <!-- Hide Toggle Button (Fixed) -->
+    <button class="hide-toggle-btn" id="hideToggleBtn">👁️ Hide</button>
+
+    <div class="main-container">
+        <!-- Panel Kiri - Roda -->
+        <div class="wheel-section">
+            <div class="wheel-title-section">
+                <h1 class="wheel-title" id="wheelTitle">Wheel of Names</h1>
+                <p class="wheel-description" id="wheelDescription">Spin the wheel to pick a random winner!</p>
+            </div>
+            <div class="wheel-container">
+                <div class="arrow-pointer"></div>
+                <canvas id="wheelCanvas"></canvas>
+                <button class="center-button" id="spinBtn">SPIN</button>
+            </div>
+        </div>
+
+        <!-- Panel Kanan - Entries & Results -->
+        <div class="sidebar">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" id="entriesTab">
+                    <span class="tab-icon">📝</span>
+                    Entries
+                    <span class="tab-badge" id="entriesBadge">6</span>
+                </button>
+                <button class="tab-btn" id="resultsTab">
+                    <span class="tab-icon">📊</span>
+                    Results
+                    <span class="tab-badge" id="resultsBadge">0</span>
+                </button>
+            </div>
+
+            <!-- Entries Panel -->
+            <div class="tab-content active" id="entriesContent">
+                <!-- Settings Section -->
+                <div class="settings-section">
+                    <div class="settings-title">⚙️ Settings</div>
+                    <div class="switch-container">
+                        <span class="switch-label">Remove winner after spin</span>
+                        <label class="switch">
+                            <input type="checkbox" id="removeWinnerSwitch">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="entries-header">
+                    <button class="action-btn" id="shuffleBtn">🔀 Shuffle</button>
+                    <button class="action-btn" id="sortBtn">⬆️ Sort</button>
+                    <div class="action-btn-group">
+                        <button class="action-btn" id="addImageBtn">🖼️ Add image ▲</button>
+                    </div>
+                </div>
+
+                <!-- Hidden file inputs -->
+                <input type="file" id="backgroundImageInput" class="hidden-file-input" accept="image/*">
+                <input type="file" id="centerImageInput" class="hidden-file-input" accept="image/*">
+                <input type="file" id="entryImageInput" class="hidden-file-input" accept="image/*">
+                
+                <label class="advanced-checkbox">
+                    <input type="checkbox" id="advancedToggle">
+                    <span>Advanced</span>
+                </label>
+
+                <div class="entries-list" id="entriesList"></div>
+
+                <button class="add-entry-btn" id="addEntryBtn">+ Add new entry</button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="tab-content" id="resultsContent">
+                <div class="results-list" id="resultsList">
+                    <div class="empty-results">Belum ada hasil. Putar roda untuk mulai!</div>
+                </div>
+                <button class="clear-results-btn" id="clearResultsBtn">🗑️ Clear all results</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Title -->
+    <div class="modal-overlay" id="editTitleModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">Edit Title & Description</span>
+                <button class="modal-close-btn" id="closeModalBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-input" id="titleInput" placeholder="Enter title...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="descriptionInput" placeholder="Enter description..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" id="cancelModalBtn">Cancel</button>
+                <button class="modal-btn modal-btn-save" id="saveModalBtn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Pemenang -->
+    <div class="winner-popup-overlay" id="popupOverlay">
+        <div class="winner-popup">
+            <div class="winner-popup-header">
+                <span>We have a winner!</span>
+                <button class="winner-popup-close-btn" id="closePopupBtn">×</button>
+            </div>
+            <div class="winner-popup-content">
+                <div class="winner-popup-name" id="popupWinnerName">Loading...</div>
+                <div class="popup-buttons">
+                    <button class="popup-btn popup-btn-close" id="closePopup">Close</button>
+                    <button class="popup-btn popup-btn-remove" id="removePopupBtn">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Dropdown Overlay -->
+    <div class="image-dropdown" id="imageDropdown">
+        <div class="dropdown-menu">
+            <div class="dropdown-item" id="addBackgroundImage">
+                <div class="dropdown-icon yellow">🎨</div>
+                <span class="dropdown-text">Add background image</span>
+            </div>
+            <div class="dropdown-item" id="addCenterImage">
+                <div class="dropdown-icon gray">⭐</div>
+                <span class="dropdown-text">Add center image</span>
+            </div>
+            <div class="dropdown-item" id="addImageAsEntry">
+                <div class="dropdown-icon teal">🖼️</div>
+                <span class="dropdown-text">Add image as entry</span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+ 
+</body>
+</html>
